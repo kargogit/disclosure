@@ -9,8 +9,8 @@ with os.scandir( CSVPath ) as Entries:
         if( Entry.is_file() ):
             CSVMatch = re.search(".+\.csv", Entry.name)
             if( CSVMatch is not None ):
-                filePath = os.path.join( CSVPath, Entry.name )
-                CSVData = pd.read_csv( filePath )
+                entryPath = os.path.join( CSVPath, Entry.name )
+                CSVData = pd.read_csv( entryPath )
                 CSVData = pd.DataFrame( CSVData["Content"] )
                 CSVData = CSVData.rename( columns = { "Content": "Text" } )
                 JSONPath = re.sub( "CSV", "JSON", CSVPath )
