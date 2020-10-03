@@ -6,8 +6,8 @@ import os
 import re
 import pandas as pd
 
-datasetPath = os.path.join( "DatasetPrep", "Dataset" )
-textPath = os.path.join( datasetPath, "TXTs" )
+datasetPath = os.path.join( r"DatasetPrep", r"Dataset" )
+textPath = os.path.join( datasetPath, r"TXTs" )
 with os.scandir( textPath ) as Entries:
     for Entry in Entries:
         if( Entry.is_dir() ):
@@ -15,7 +15,7 @@ with os.scandir( textPath ) as Entries:
             JSONFrame = pd.DataFrame()
             with os.scandir( textDir ) as textIter:
                 for textEntry in textIter:
-                    TXTMatch = re.search(".+\.txt", textEntry.name)
+                    TXTMatch = re.search( ".+\.txt", textEntry.name )
                     if( TXTMatch is not None ):
                         txtFilePath = os.path.join( textDir, textEntry.name )
                         textData = ""

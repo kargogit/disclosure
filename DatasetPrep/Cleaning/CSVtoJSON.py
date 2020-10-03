@@ -2,8 +2,8 @@ import os
 import re
 import pandas as pd
 
-datasetPath = os.path.join( "DatasetPrep", "Dataset" )
-CSVPath = os.path.join( datasetPath, "CSVs" )
+datasetPath = os.path.join( r"DatasetPrep", r"Dataset" )
+CSVPath = os.path.join( datasetPath, r"CSVs" )
 with os.scandir( CSVPath ) as Entries:
     for Entry in Entries:
         if( Entry.is_file() ):
