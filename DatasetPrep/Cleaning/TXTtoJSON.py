@@ -21,7 +21,6 @@ with os.scandir( textPath ) as Entries:
                         textData = ""
                         with open( file = txtFilePath, mode = "r", encoding = "utf-8", errors = "ignore" ) as textFile:
                             textData = textFile.read()
-                        textData = re.sub( '[^a-zA-Z ]+', ' ', textData )
                         JSONFrame = JSONFrame.append(  { "Text": textData },  ignore_index = True  )
             JSONName = Entry.name + ".json"
             JSONPath = re.sub( "TXT", "JSON", textPath )
