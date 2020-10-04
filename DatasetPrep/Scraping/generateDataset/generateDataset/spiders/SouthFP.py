@@ -2,8 +2,8 @@ import sys
 import scrapy
 
 storyCount = 0
-storyLimit = int( sys.argv[1] )
-pageLimit = int( sys.argv[2] )
+storyLimit = 1
+pageLimit = 1
 
 class SouthfpSpider(scrapy.Spider):
     name = 'SouthFP'
