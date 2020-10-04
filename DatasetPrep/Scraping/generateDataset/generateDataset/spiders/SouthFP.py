@@ -38,8 +38,7 @@ class SouthfpSpider(scrapy.Spider):
         headLine = response.css('h1.inner-main-title::text').extract_first()
         Source = "FirstPost"
         sourceLink = "https://www.firstpost.com/"
-        #TODO Check the CSS Path to Image Tag
-        imageLink = response.css('img[class*="wp-image-"]::attr(src)').extract_first()
+        imageLink = response.css( "div.article-img>img::attr(src)" ).extract_first()
         if(imageLink is None):
             imageLink = ""
         contentList = response.css( "div.article-full-content>p::text" ).extract()

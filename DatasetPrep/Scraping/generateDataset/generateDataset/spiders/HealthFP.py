@@ -5,10 +5,10 @@ storyCount = 0
 storyLimit = 1
 pageLimit = 1
 
-class FinancefpSpider(scrapy.Spider):
-    name = 'FinanceFP'
+class HealthfpSpider(scrapy.Spider):
+    name = 'HealthFP'
     allowed_domains = ["firstpost.com"]
-    start_urls = ["https://www.firstpost.com/category/business/page/1"]
+    start_urls = ["https://www.firstpost.com/category/health/page/1"]
 
     def parse(self, response):
         Links = response.css("div.big-thumb>div.title_wrap>h3.main-title>a::attr(href)").extract()
