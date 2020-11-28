@@ -1,5 +1,6 @@
 import sys
 import scrapy
+import re
 
 storyCount = 0
 storyLimit = 1
@@ -11,8 +12,10 @@ class TechfpSpider(scrapy.Spider):
     start_urls = ["https://www.firstpost.com/tech/news-analysis/page/2"]
 
     def parse(self, response):
+        currPageNum = int( response.css( "a.active::text" ).extract_first() )
         Links = response.css('div.text-wrapper>a[href*="firstpost.com"]::attr(href)').extract()
         for Link in Links:
+            global storyCount
             if(
                 ( storyCount < storyLimit )
                 or
@@ -21,9 +24,9 @@ class TechfpSpider(scrapy.Spider):
                 yield scrapy.Request(Link, callback = self.parseNews)
                 storyCount += 1
             else:
+                currPageNum = pageLimit
                 break
 
-        currPageNum = int( response.css( "a.active::text" ).extract_first() )
         if(
             ( currPageNum < pageLimit )
             or
@@ -38,11 +41,18 @@ class TechfpSpider(scrapy.Spider):
         headLine = response.css( "h1.post-title::text" ).extract_first()
         Source = "FirstPost"
         sourceLink = "https://www.firstpost.com/"
+
         imageLink = response.css( 'img[class*="wp-image-"]::attr(src)' ).extract_first()
         if(imageLink is None):
             imageLink = ""
-        contentList = response.css( "div.text-content-wrap>p::text" ).extract()
+        else:
+            imageLink = re.search( "images.+", imageLink )[0]
+
+        paraText = set(  response.css( "div.text-content-wrap>p::text" ).extract()  )
+        paraSpanText = set(  response.css( "div.text-content-wrap>p span::text" ).extract()  )
+        contentList = list(  paraText.union( paraSpanText )  )
         Content = " ".join( contentList )
+
         Output = {
             "headLine": headLine,
             "storyLink": storyLink,

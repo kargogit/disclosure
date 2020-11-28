@@ -1,5 +1,6 @@
 import sys
 import scrapy
+import re
 
 storyCount = 0
 storyLimit = 1
@@ -11,8 +12,10 @@ class SportsfpSpider(scrapy.Spider):
     start_urls = ["https://www.firstpost.com/category/sports/page/1"]
 
     def parse(self, response):
-        Links = response.css("div.big-thumb>div.title_wrap>h3.main-title>a::attr(href)").extract()
+        currPageNum = int( response.css("ul.pagination>li.active>a::text").extract_first() )
+        Links = response.css("div.big-thumb>div.title-wrap>h3.main-title>a::attr(href)").extract()
         for Link in Links:
+            global storyCount
             if(
                 ( storyCount < storyLimit )
                 or
@@ -21,9 +24,9 @@ class SportsfpSpider(scrapy.Spider):
                 yield scrapy.Request(Link, callback = self.parseNews)
                 storyCount += 1
             else:
+                currPageNum = pageLimit
                 break
 
-        currPageNum = int( response.css("ul.pagination>li.active>a::text").extract_first() )
         if(
             ( currPageNum < pageLimit )
             or
@@ -38,11 +41,18 @@ class SportsfpSpider(scrapy.Spider):
         headLine = response.css('h1.inner-main-title::text').extract_first()
         Source = "FirstPost"
         sourceLink = "https://www.firstpost.com/"
-        imageLink = response.css( "div.article-img>img::attr(src)" ).extract_first()
+
+        imageLink = response.css( "div.article-img>img::attr(data-src)" ).extract_first()
         if(imageLink is None):
             imageLink = ""
-        contentList = response.css( "div.article-full-content>p::text" ).extract()
+        else:
+            imageLink = re.search( "images.+", imageLink )[0]
+
+        paraText = set(  response.css( "div.article-full-content>p::text" ).extract()  )
+        paraSpanText = set(  response.css( "div.article-full-content>p span::text" ).extract()  )
+        contentList = list(  paraText.union( paraSpanText )  )
         Content = " ".join( contentList )
+
         Output = {
             "headLine": headLine,
             "storyLink": storyLink,

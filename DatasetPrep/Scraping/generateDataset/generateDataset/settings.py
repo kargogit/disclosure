@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'generateDataset.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'generateDataset (+http://www.yourdomain.com)'
+USER_AGENT = "Mozilla/5.0 (Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
