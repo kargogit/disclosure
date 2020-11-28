@@ -39,7 +39,11 @@ class BollyfpSpider(scrapy.Spider):
 
     def parseNews(self, response):
         storyLink = response.url      
-        headLine = response.css('h1.inner-main-title::text').extract_first()
+        headLineV1 = response.css('h1.inner-main-title::text').extract_first() or ""
+        headLineV2 = response.css('h1.post-title::text').extract_first() or ""
+        headLine = headLineV1 + headLineV2
+        if( headLine is None ):
+            headLine = ""
         Source = "FirstPost"
         sourceLink = "https://www.firstpost.com/"
 

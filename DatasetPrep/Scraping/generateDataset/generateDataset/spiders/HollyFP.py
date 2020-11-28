@@ -37,8 +37,14 @@ class HollyfpSpider(scrapy.Spider):
             yield scrapy.Request(nextPageLink, callback = self.parse)
 
     def parseNews(self, response):
-        storyLink = response.url      
-        headLine = response.css('h1.inner-main-title::text').extract_first()
+        storyLink = response.url
+
+        headLineV1 = response.css('h1.inner-main-title::text').extract_first() or ""
+        headLineV2 = response.css('h1.post-title::text').extract_first() or ""
+        headLine = headLineV1 + headLineV2
+        if( headLine is None ):
+            headLine = ""
+            
         Source = "FirstPost"
         sourceLink = "https://www.firstpost.com/"
 
@@ -48,11 +54,15 @@ class HollyfpSpider(scrapy.Spider):
         else:
             imageLink = re.search( "images.+", imageLink )[0]
 
-        paraText = set(  response.css( "div.article-full-content>p::text" ).extract()  )
-        paraSpanText = set(  response.css( "div.article-full-content>p span::text" ).extract()  )
-        contentList = list(  paraText.union( paraSpanText )  )
+        paraTextV1 = set(  response.css( "div.article-full-content>p::text" ).extract()  )
+        paraSpanTextV1 = set(  response.css( "div.article-full-content>p span::text" ).extract()  )
+        contentListV1 = paraTextV1.union( paraSpanTextV1 )
+        paraTextV2 = set(  response.css( "div.text-content-wrap>p::text" ).extract()  )
+        paraSpanTextV2 = set(  response.css( "div.text-content-wrap>p span::text" ).extract()  )
+        contentListV2 = paraTextV2.union( paraSpanTextV2 )
+        contentList = list(  contentListV1.union( contentListV2 )  )
         Content = " ".join( contentList )
-
+        
         Output = {
             "headLine": headLine,
             "storyLink": storyLink,
