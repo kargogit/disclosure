@@ -3,8 +3,8 @@ import scrapy
 import re
 
 storyCount = 0
-storyLimit = 1
-pageLimit = 1
+storyLimit = 333
+pageLimit = 100
 
 class SouthfpSpider(scrapy.Spider):
     name = 'SouthFP'

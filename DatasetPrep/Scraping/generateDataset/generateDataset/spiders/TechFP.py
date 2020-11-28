@@ -3,8 +3,8 @@ import scrapy
 import re
 
 storyCount = 0
-storyLimit = 1
-pageLimit = 1
+storyLimit = 999
+pageLimit = 100
 
 class TechfpSpider(scrapy.Spider):
     name = 'TechFP'

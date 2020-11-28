@@ -3,13 +3,13 @@ import scrapy
 import re
 
 storyCount = 0
-storyLimit = 333
+storyLimit = 999
 pageLimit = 100
 
-class HollyfpSpider(scrapy.Spider):
-    name = 'HollyFP'
+class PoliticsfpSpider(scrapy.Spider):
+    name = 'PoliticsFP'
     allowed_domains = ["firstpost.com"]
-    start_urls = ["https://www.firstpost.com/entertainment/hollywood/page/1"]
+    start_urls = ["https://www.firstpost.com/category/politics/page/1"]
 
     def parse(self, response):
         currPageNum = int( response.css("ul.pagination>li.active>a::text").extract_first() )
@@ -37,18 +37,16 @@ class HollyfpSpider(scrapy.Spider):
             yield scrapy.Request(nextPageLink, callback = self.parse)
 
     def parseNews(self, response):
-        storyLink = response.url
-
+        storyLink = response.url      
         headLineV1 = response.css('h1.inner-main-title::text').extract_first() or ""
         headLineV2 = response.css('h1.post-title::text').extract_first() or ""
         headLine = headLineV1 + headLineV2
         if( headLine is None ):
             headLine = ""
-            
         Source = "FirstPost"
         sourceLink = "https://www.firstpost.com/"
-
-        imageLink = response.css( "div.article-img>img::attr(data-src)" ).extract_first()
+        
+        imageLink = response.css( "div.article-img>img::attr(src)" ).extract_first()
         if(imageLink is None):
             imageLink = ""
         else:
@@ -62,7 +60,7 @@ class HollyfpSpider(scrapy.Spider):
         contentListV2 = paraTextV2.union( paraSpanTextV2 )
         contentList = list(  contentListV1.union( contentListV2 )  )
         Content = " ".join( contentList )
-        
+
         Output = {
             "headLine": headLine,
             "storyLink": storyLink,
