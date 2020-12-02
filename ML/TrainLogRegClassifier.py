@@ -13,7 +13,7 @@ featureFrame = pd.read_csv(featureFramePath)
 X = featureFrame.iloc[:, :-1].values
 Y = featureFrame.iloc[:, -1].values
 
-X_Train, X_Test, Y_Train, Y_Test = train_test_split(X, Y, test_size = 0.10, random_state = 69)
+X_Train, X_Test, Y_Train, Y_Test = train_test_split(X, Y, test_size = 0.18, random_state = 69)
 Classifier = LogisticRegression( solver = "newton-cg", multi_class = "ovr", n_jobs = -1, max_iter = 180 )
 Classifier.fit( X_Train, Y_Train )
 
