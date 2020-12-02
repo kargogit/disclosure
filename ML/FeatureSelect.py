@@ -1,4 +1,5 @@
 import os
+import sys
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import chi2, SelectKBest
@@ -16,6 +17,7 @@ genreDict = {
     "Technology": 4,
     "Health": 5
 }
+featureCount = int( sys.argv[1] )
 
 def prepArticleList():
     with os.scandir( cleanTXTPath ) as Genres:
@@ -25,10 +27,10 @@ def prepArticleList():
                 with os.scandir( genrePath ) as Articles:
                     for Article in Articles:
                         if( Article.is_file() ):
-							if(  Article.name.endswith( ".txt" )  ):
-								articlePath = os.path.join( genrePath, Article.name )
-								articleList.append( articlePath )
-								labelList.append(  genreDict[ Genre.name ]  )
+                            if(  Article.name.endswith( ".txt" )  ):
+                                articlePath = os.path.join( genrePath, Article.name )
+                                articleList.append( articlePath )
+                                labelList.append(  genreDict[ Genre.name ]  )
 
 
 def prepVectors():
@@ -45,7 +47,7 @@ def prepVectors():
     columnFrame = pd.DataFrame( featureNames )
     featureScoreFrame = pd.concat( [columnFrame, scoreFrame], axis=1)
     featureScoreFrame.columns = ["Features", "Score"]
-    featureScoreFrame = featureScoreFrame.nlargest( 3600, "Score" )
+    featureScoreFrame = featureScoreFrame.nlargest( featureCount, "Score" )
 
     featureNames = set( featureNames )
     topFeatureSet = set( featureScoreFrame["Features"] )
