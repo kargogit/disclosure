@@ -1,0 +1,104 @@
+a                 {
+  color:#000000;
+  text-decoration:none;
+}
+
+table#PageTable   {
+  border-radius: 0.5em;
+  width: 85%;
+  background-color: #f6f6ef;
+}
+
+table#HeadBanner  {
+  background-color: #ff6600;
+  border-radius: 0.5em;
+  border-collapse: collapse;
+  width: 100%;
+  line-height: 0;
+}
+
+td.BannerContent  {
+  padding: 0px 10px;
+}
+
+.PageHead         {
+  color: white;
+}
+
+a#LoginLink       {
+  text-align: right;
+}
+
+table#ItemSpace   {
+  /* border: 1px solid black; */
+  border-collapse: collapse;
+  /* border-spacing: 0 1em; */
+  width: 85%;
+  /* padding: 10px; */
+}
+
+table.GenreTable  {
+  /* border: 1px solid black; */
+  border-spacing: 15px;
+  /* display: table; */
+  /* border-collapse: collapse; */
+  width: 100%;
+  table-layout: fixed;
+}
+
+th.GenreHead      {
+  text-align: left;
+}
+
+div.NewsCluster      {
+  border: 1px solid #828282;
+  border-radius: 0.5em;
+  background-color: white;
+  /* padding: 10px; */
+}
+
+img.NewsThumbs    {
+  border-radius: 0.5em;
+  height: 100px;
+  width: 167px;
+}
+
+a.HeadLine        {
+  font-size: 1.17em;
+}
+
+td.ItemCol        {
+  vertical-align: middle;
+  text-align: center;
+  /* padding:0 1em 0 1em; */
+  /* border: 1px solid black; */
+  /* width: 25%; */
+}
+
+/* td.ImageCol    {
+  width: 25%;
+} */
+
+td.HeadCol        {
+  padding:0 1.5em 0 1.5em;
+  width: 54em;
+}
+
+table.ClusterTab  {
+  table-layout: fixed;
+}
+
+.HeadListItem     {
+  /* border: 1px solid black; */
+  text-align: center;
+  width: 50em;
+}
+
+.SrcItem          {
+  /* border: 1px solid black; */
+  text-align: center;
+}
+
+a.Source          {
+  color: #828282;
+}
