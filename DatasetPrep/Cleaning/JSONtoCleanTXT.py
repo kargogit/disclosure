@@ -21,7 +21,7 @@ with os.scandir( JSONPath ) as Entries:
                         open( file = filePath, mode = 'r', encoding = "utf-8", errors = "ignore" )
                     )
                 )
-                outPath = os.path.join( cleanTXTPath, Entry.name[:-5] + ".txt" )
+                outPath = os.path.join( cleanTXTPath, Entry.name[:-5] )
                 Articles = Articles["Content"].tolist()
                 for Article in Articles:
                     Article = Article.lower()
