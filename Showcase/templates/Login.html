@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sign Up Form</title>
+</head>
+
+<style>
+  body {
+    font-family: "Dejavu Sans";
+    font-size: 95%;
+    max-width: 400px;
+    margin: 9% auto;
+    padding: 16px;
+    background: #f7f7f7;
+    border: 1px solid black;
+    border-radius: 0.3em;
+  }
+
+  h1 {
+    background: #ff6600;
+    padding: 20px 0;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+    margin: -16px -16px 16px -16px;
+  }
+
+  #FORMTAB {
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 10px;
+  }
+
+  .FormItem {
+    text-align: center;
+    display: table-row;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 4%;
+    border: 1px solid #ccc;
+    padding: 3%;
+    color: #555;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    box-shadow: 0 0 5px #ff6600;
+    padding: 3%;
+    border: 1px solid #ff6600;
+  }
+
+  input[type="submit"],
+  input[type="button"] {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 3%;
+    background: #ff6600;
+    border-bottom: 2px solid #30c29e;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    color: #fff;
+    font-size: 120%;
+    margin-top: 10%;
+    border-radius: 0.5em;
+  }
+
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background: #2ebc99;
+  }
+
+  input::placeholder{
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .QLabel {
+    font-size: 120%;
+  }
+</style>
+
+<script>
+  function CheckForm(){
+    var FormElem = document.getElementById("REGFORM").elements;
+    for(var i = 0; i < FormElem.length; i++){
+      if( FormElem[i].tagName === "INPUT" ){
+        if( FormElem[i].value === "" ){
+          alert("Please fill out all the details.");
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+</script>
+
+<body>
+  <h1>Let's get you signed in</h1>
+  <form action="/Login" method="POST">
+    <table id="FORMTAB">
+      <tr class="FormItem">
+        <td>
+          <input placeholder="Email" type="text" name="Email">
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <input id="PASS" placeholder="Password" type="password" name="Password">
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <input type="submit" value="Sign In">
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>

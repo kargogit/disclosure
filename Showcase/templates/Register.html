@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sign Up Form</title>
+</head>
+
+<style>
+  body {
+    font-family: "Dejavu Sans";
+    font-size: 95%;
+    max-width: 400px;
+    margin: 2% auto;
+    padding: 16px;
+    background: #f7f7f7;
+    border: 1px solid black;
+    border-radius: 0.3em;
+  }
+
+  h1 {
+    background: #ff6600;
+    padding: 20px 0;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+    margin: -16px -16px 16px -16px;
+  }
+
+  #FORMTAB {
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 10px;
+  }
+
+  .FormItem {
+    text-align: center;
+    display: table-row;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 4%;
+    border: 1px solid #ccc;
+    padding: 3%;
+    color: #555;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    box-shadow: 0 0 5px #ff6600;
+    padding: 3%;
+    border: 1px solid #ff6600;
+  }
+
+  input[type="submit"],
+  input[type="button"] {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 3%;
+    background: #ff6600;
+    border-bottom: 2px solid #30c29e;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    color: #fff;
+    font-size: 120%;
+    margin-top: 10%;
+    border-radius: 0.5em;
+  }
+
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background: #2ebc99;
+  }
+
+  input::placeholder{
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+
+  .QLabel {
+    font-size: 120%;
+  }
+</style>
+
+<script>
+  function CheckEmail() {
+    var EMail = document.getElementById("EMAIL").value;
+    var RegEx = new RegExp("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$");
+    if (RegEx.test(EMail) == false) {
+      alert("Please enter a valid Email address.");
+    }
+  }
+
+  function VerifyPass() {
+    var Pass = document.getElementById("PASS").value;
+    var RepeatPass = document.getElementById("PASSCONF").value;
+    if (Pass !== RepeatPass) {
+      alert("Passwords do not match.")
+    }
+  }
+
+  function CheckForm(){
+    var FormElem = document.getElementById("REGFORM").elements;
+    for(var i = 0; i < FormElem.length; i++){
+      if( FormElem[i].tagName === "INPUT" ){
+        if( FormElem[i].value === "" ){
+          alert("Please fill out all the details.");
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+</script>
+
+<body>
+  <h1>Let's get you signed up</h1>
+  <form action="/Register" method="POST">
+    <table id="FORMTAB">
+      <tr class="FormItem">
+        <td>
+          <input placeholder="First Name" type="text" name="firstName">
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <input placeholder="Last Name" type="text" name="lastName">
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <input id="EMAIL" placeholder="Email Address" type="email" name="Email">
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <input id="PASS" placeholder="Password" type="password" name="Password">
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <input id="PASSCONF" placeholder="Re-enter your password" type="password" name="rePassword">
+        </td>
+      </tr class="FormItem">
+      <tr class="FormItem">
+        <td>
+          <span class="QLabel"> Birthday </span> <br> <input class="DOB" type="date" name="DOB">
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <span class="QLabel"> Gender </span>
+          <br>
+          <input checked name="Gender" type="radio" value="Male" /> <span class="ALabel"> Male </span>
+          <input name="Gender" type="radio" value="Female" /> <span class="ALabel"> Female </span>
+          <input name="Gender" type="radio" value="Other" /> <span class="ALabel"> Other </span>
+        </td>
+      </tr>
+      <tr class="FormItem">
+        <td>
+          <input type="submit" value="Sign Up">
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>

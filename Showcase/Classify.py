@@ -143,17 +143,9 @@ def main():
 
     print(clusterDict)
     finalFile = generateFinalJSON( clusterDict )
-    finalFilePath = os.path.join( r"ShowcaseDataset.jsonp" )
+    finalFilePath = os.path.join( r"ShowcaseDataset.json" )
     with open( finalFilePath, 'w' ) as finalFilePointer:
         json.dump( finalFile, finalFilePointer )
-
-    JSONData = ""
-    with open( file = finalFilePath, mode="r", encoding="utf-8", errors="ignore" ) as txtFile:
-        JSONData = txtFile.read()
-    JSONData = r"MyData = [" + JSONData + r"]"
-
-    with open( file = finalFilePath, mode="w", encoding="utf-8" ) as txtFile:
-        txtFile.write(JSONData)
 
 
 if __name__ == "__main__":

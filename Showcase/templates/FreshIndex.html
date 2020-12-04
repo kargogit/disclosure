@@ -1,0 +1,52 @@
+{% extends "FreshIndexLayout.html" %}
+
+{% block newsSpace %}
+    {% for Genre in newsData.keys() %}
+        <tr class = "genreSpace">
+            <td class = "genreContent">
+                <table class = "genreTable">
+                    <tr class = "genreRow">
+                        <th class = "genreHead Vertical">
+                            {{ Genre.upper() }}
+                        </th>
+                    {% for Cluster in newsData[Genre] %}
+                        <td class = "clusterRow Vertical">
+                            <div class = "newsCluster">
+                                <table class = "clusterTable">
+                                    <tr class = "Cluster">
+                                        <td class = "itemColumn imageColumn">
+                                            <img class = "newsThumb" src = "{{ Cluster[0]['imageLink'] }}">
+                                        </td>
+                                        <td class = "itemColumn headLineColumn">
+                                            <table class = "storyTable">
+                                                {%   for storyNum in range(  Cluster | length  )   %}
+                                                    <tr>
+                                                        {% if storyNum == 0 %}
+                                                            <th class = "headListItem">
+                                                                <a class = "headLine" href = "{{ Cluster[storyNum]['storyLink'] }}">{{ Cluster[storyNum]["headLine"] }}</a>
+                                                            </th>
+                                                            <th class = "sourceItem">
+                                                                <a class = "Source" href = "{{ Cluster[storyNum]['sourceLink'] }}">{{ Cluster[storyNum]["Source"] }}</a>
+                                                            </th>
+                                                        {% else %}
+                                                            <td class = "headListItem">
+                                                                <a class = "headLine" href = "{{ Cluster[storyNum]['storyLink'] }}">{{ Cluster[storyNum]["headLine"] }}</a>
+                                                            </td>
+                                                            <td class = "sourceItem">
+                                                                <a class = "Source" href = "{{ Cluster[storyNum]['sourceLink'] }}">{{ Cluster[storyNum]["Source"] }}</a>
+                                                            </td>
+                                                        {% endif %}
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    {% endfor %}
+                </table>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}

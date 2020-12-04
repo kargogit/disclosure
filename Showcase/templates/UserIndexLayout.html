@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name = "viewport" content = "initial-scale = 1, width = device-width">
+    <style>
+        a                 {
+        color:#000000;
+        text-decoration:none;
+        }
+
+        table#pageTable   {
+        border-radius: 0.5em;
+        width: 85%;
+        background-color: #f6f6ef;
+        }
+
+        table#headBanner  {
+        background-color: #ff6600;
+        border-radius: 0.5em;
+        border-collapse: collapse;
+        width: 100%;
+        line-height: 0;
+        }
+
+        .pageHead         {
+            color: white;
+        }
+
+        h3.pageHead       {
+            margin-left: 0.5em;
+        }
+
+        a#settingsLink, a#logoutLink
+        {
+            display: table-cell;
+            float: right;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+        }
+
+        table#itemSpace   {
+        /* border: 1px solid black; */
+        border-collapse: collapse;
+        /* border-spacing: 0 1em; */
+        width: 85%;
+        /* padding: 10px; */
+        }
+
+        table.genreTable  {
+        /* border: 1px solid black; */
+        border-spacing: 15px;
+        /* display: table; */
+        border-collapse: separate;
+        width: 100%;
+        table-layout: fixed;
+        }
+
+        th.genreHead      {
+        text-align: left;
+        }
+
+        .Vertical         {
+            display: block;
+        }
+
+        div.newsCluster   {
+        border: 1px solid #828282;
+        border-radius: 0.5em;
+        background-color: white;
+        /*padding: 10px;*/
+        }
+
+        img.newsThumb    {
+        border-radius: 0.5em;
+        height: 100px;
+        width: 167px;
+        }
+
+        a.headLine        {
+        font-size: 1.17em;
+        }
+
+        td.itemColumn        {
+        vertical-align: middle;
+        text-align: center;
+        /* padding:0 1em 0 1em; */
+        /* border: 1px solid black; */
+        /* width: 25%; */
+        }
+
+        /* td.ImageCol    {
+        width: 25%;
+        } */
+
+        td.headLineColumn        {
+        padding:0 1.5em 0 1.5em;
+        width: 54em;
+        }
+
+        table.storyTable  {
+        table-layout: fixed;
+        }
+
+        .headListItem     {
+        /* border: 1px solid black; */
+        text-align: center;
+        width: 50em;
+        }
+
+        .sourceItem          {
+        /* border: 1px solid black; */
+        text-align: center;
+        }
+
+        a.Source          {
+        color: #828282;
+        }
+    </style>
+    <title>News Aggregator</title>
+</head>
+
+<body>
+    <center>
+        <table id="pageTable">
+            <tr id="headRow">
+                <td>
+                    <table id="headBanner">
+                        <tr>
+                            <td class="bannerContent">
+                                <h3 class="pageHead"> DISCLOSURE </h3>
+                            </td>
+                            <td class="bannerContent formLink">
+                                <a href="/UserSettings" id="settingsLink">
+                                    <h4 class="pageHead"> SETTINGS </h4>
+                                </a>                                
+                                <a href="/Logout" id="logoutLink">
+                                    <h4 class="pageHead"> LOGOUT </h4>
+                                </a>
+                            </td>
+
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <center>
+                        <table id="itemSpace">
+
+                            {% block newsSpace %} {% endblock %}
+
+                        </table>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </center>
+</body>
+
+</html>
